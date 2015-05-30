@@ -46,5 +46,5 @@ class Dot(Instruction):
     print chr(node.value)
     return (self.next, node)
 
-def instruction_types():
-  return [LBracket, RBracket, Plus, Minus, LShift, RShift, Dot]
+instruction_types = [LBracket, RBracket, Plus, Minus, LShift, RShift, Dot]
+instruction_regex = r'[^\+\-\[\]\<\>\.]'

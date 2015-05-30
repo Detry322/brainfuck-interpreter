@@ -1,4 +1,4 @@
-from instructions import instruction_types, RBracket, LBracket
+from instructions import instruction_types, instruction_regex, RBracket, LBracket
 from node import Node
 import re, sys
 
@@ -21,11 +21,11 @@ class BrainfuckInterpreter:
     """
     Takes a string that represents the code, and parses it into a tree of instructions
     """
-    stripped_code = re.sub(r'[^\+\-\[\]\<\>\.]',"", code)
+    stripped_code = re.sub(instruction_regex,"", code)
     parse_current = None
     for char in stripped_code:
       prev = parse_current
-      for t in instruction_types():
+      for t in instruction_types:
         if char == t.symbol:
           parse_current = t(prev)
       if isinstance(parse_current, RBracket):
