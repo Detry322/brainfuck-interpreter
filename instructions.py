@@ -1,3 +1,5 @@
+import sys
+
 class Instruction:
   def __init__(self,prev):
     self.prev = prev
@@ -43,7 +45,7 @@ class RShift(Instruction):
 class Dot(Instruction):
   symbol = "."
   def execute(self, node):
-    print chr(node.value)
+    sys.stdout.write(chr(node.value))
     return (self.next, node)
 
 instruction_types = [LBracket, RBracket, Plus, Minus, LShift, RShift, Dot]
