@@ -1,4 +1,5 @@
 import sys
+import readchar
 
 class Instruction:
   def __init__(self,prev):
@@ -46,7 +47,14 @@ class Dot(Instruction):
   symbol = "."
   def execute(self, node):
     sys.stdout.write(chr(node.value))
+    sys.stdout.flush()
     return (self.next, node)
 
-instruction_types = [LBracket, RBracket, Plus, Minus, LShift, RShift, Dot]
-instruction_regex = r'[^\+\-\[\]\<\>\.]'
+class Comma(Instruction):
+  symbol = ","
+  def execute(self, node):
+    node.value = ord(readchar.readchar())
+    return (self.next, node)
+
+instruction_types = [LBracket, RBracket, Plus, Minus, LShift, RShift, Dot, Comma]
+instruction_regex = r'[^\+\-\[\]\<\>\.\,]'
